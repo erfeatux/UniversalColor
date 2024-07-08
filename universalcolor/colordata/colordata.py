@@ -227,7 +227,7 @@ class HSVData(Data):
 					ret[i] = 0.0
 				elif ret[i] > 1:
 					ret[i] = 1.0
-		return HSV(*ret)
+		return HSL(*ret)
 
 
 	def asHSV(self) -> HSV:
