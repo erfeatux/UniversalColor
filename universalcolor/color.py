@@ -153,7 +153,7 @@ class Color:
 				hue = kwargs['hsvHue']
 			if 'hsvSat' in kwargs:
 				sat = kwargs['hsvSat']
-			if 'hsvLight' in kwargs:
+			if 'hsvValue' in kwargs:
 				value = kwargs['hsvValue']
 
 			if any(not isinstance(x, int | float) for x in (hue, sat, value)):
