@@ -72,7 +72,7 @@ class Data(ABC):
 	@alpha.setter
 	def alpha(self, alpha: float | None):
 		if not isinstance(alpha, float | None):
-			raise ValueError('invalid type of alpha argument')
+			raise TypeError('invalid type of alpha argument')
 		if isinstance(alpha, float) and (alpha < 0 or alpha > 1):
 			raise ValueError('alpha is not in range')
 		dt = type(self._data)
@@ -92,13 +92,15 @@ class RGBData(Data):
 
 	def __init__(self, color: tuple[float, float, float, float | None] | RGB) -> None:
 		for c in color[:3]:
-			if not isinstance(c, float) or c < 0 or c > 1:
+			if not isinstance(c, float):
+				raise TypeError('is not rgb color')
+			if c < 0 or c > 1:
 				raise ValueError('is not rgb color')
 		if len(color) == 4:
 			if isinstance(color[3], float) and (color[3] < 0 or color[3] > 1):
 				raise ValueError('invalid alpha')
-			elif color[3] is not None and not isinstance(color[3], float):
-				raise ValueError('invalid alpha')
+			elif not isinstance(color[3], float | None):
+				raise TypeError('invalid alpha')
 
 		self.__data = RGB(*color)
 
@@ -145,12 +147,12 @@ class HSLData(Data):
 	def __init__(self, color: tuple[float, float, float, float | None] | HSL) -> None:
 		for c in color[:3]:
 			if not isinstance(c, float) or c < 0 or c > 1:
-				raise ValueError('is not rgb color')
+				raise TypeError('is not rgb color')
 		if len(color) == 4:
 			if isinstance(color[3], float) and (color[3] < 0 or color[3] > 1):
 				raise ValueError('invalid alpha')
-			elif color[3] is not None and not isinstance(color[3], float):
-				raise ValueError('invalid alpha')
+			elif not isinstance(color[3], float | None):
+				raise TypeError('invalid alpha')
 
 		self.__data = HSL(*color)
 
@@ -196,13 +198,15 @@ class HSVData(Data):
 
 	def __init__(self, color: tuple[float, float, float, float | None] | HSV) -> None:
 		for c in color[:3]:
-			if not isinstance(c, float) or c < 0 or c > 1:
+			if not isinstance(c, float):
+				raise TypeError('is not rgb color')
+			if c < 0 or c > 1:
 				raise ValueError('is not rgb color')
 		if len(color) == 4:
 			if isinstance(color[3], float) and (color[3] < 0 or color[3] > 1):
 				raise ValueError('invalid alpha')
-			elif color[3] is not None and not isinstance(color[3], float):
-				raise ValueError('invalid alpha')
+			elif not isinstance(color[3], float | None):
+				raise TypeError('invalid alpha')
 
 		self.__data = HSV(*color)
 

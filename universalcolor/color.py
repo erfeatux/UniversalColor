@@ -14,15 +14,17 @@ class Color:
 			if 'alpha' in kwargs:
 				alpha = kwargs['alpha']
 				if not isinstance(alpha, float | None):
-					raise ValueError('invalid alpha')
+					raise TypeError('invalid alpha')
 				if isinstance(alpha, float) and (alpha < 0 or alpha > 1):
 					raise ValueError('alpha argument is not in allowed range')
 			return alpha
 
 		# default constructor (from string)
 		if len(args):
-			if len(args) > 1 or not isinstance(args[0], str):
+			if len(args) > 1: 
 				raise ValueError('default constructor allow only one string argument')
+			if not isinstance(args[0], str):
+				raise TypeError('default constructor allow only one string argument')
 			color = args[0].strip().lower()
 
 			# hex string
@@ -127,7 +129,7 @@ class Color:
 				blue = kwargs['blue']
 
 			if any(not isinstance(x, int | float) for x in (red, green, blue)):
-				raise ValueError('invalid argument given to red, green or/and blue constructor')
+				raise TypeError('invalid argument given to red, green or/and blue constructor')
 
 			self.__data = fromRGB(red, green, blue, alpha)
 
@@ -142,7 +144,7 @@ class Color:
 				light = kwargs['hslLight']
 
 			if any(not isinstance(x, int | float) for x in (hue, sat, light)):
-				raise ValueError('invalid argument given to hue, sat or/and light HSL constructor')
+				raise TypeError('invalid argument given to hue, sat or/and light HSL constructor')
 
 			self.__data = fromHSL(hue, sat, light, alpha)
 
@@ -157,7 +159,7 @@ class Color:
 				value = kwargs['hsvValue']
 
 			if any(not isinstance(x, int | float) for x in (hue, sat, value)):
-				raise ValueError('invalid argument given to hue, sat or/and value HSV constructor')
+				raise TypeError('invalid argument given to hue, sat or/and value HSV constructor')
 
 			self.__data = fromHSV(hue, sat, value, alpha)
 
@@ -185,7 +187,7 @@ class Color:
 	@alpha.setter
 	def alpha(self, alpha: float | None = None):
 		if not isinstance(alpha, float | None):
-			raise ValueError('invalid type of alpha argument')
+			raise TypeError('invalid type of alpha argument')
 		self.__data.alpha = alpha
 
 	# attributes as RGB
