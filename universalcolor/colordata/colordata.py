@@ -76,7 +76,7 @@ class Data(ABC):
 		if isinstance(alpha, float) and (alpha < 0 or alpha > 1):
 			raise ValueError('alpha is not in range')
 		dt = type(self._data)
-		self._data = dt(*self._data[:3], alpha)
+		self._data = dt(*self._data[:3], round(alpha, 10))
 
 # RGB data interface implementation
 class RGBData(Data):
@@ -102,7 +102,7 @@ class RGBData(Data):
 			elif not isinstance(color[3], float | None):
 				raise TypeError('invalid alpha')
 
-		self.__data = RGB(*color)
+		self.__data = RGB(*(round(x, 10) for x in color if isinstance(x, float)))
 
 	def asRGB(self) -> RGB:
 		return self.__data
@@ -154,7 +154,7 @@ class HSLData(Data):
 			elif not isinstance(color[3], float | None):
 				raise TypeError('invalid alpha')
 
-		self.__data = HSL(*color)
+		self.__data = HSL(*(round(x, 10) for x in color if isinstance(x, float)))
 
 	def asRGB(self) -> RGB:
 		ret = [self.__data.hue, self.__data.light, self.__data.sat]
@@ -208,7 +208,7 @@ class HSVData(Data):
 			elif not isinstance(color[3], float | None):
 				raise TypeError('invalid alpha')
 
-		self.__data = HSV(*color)
+		self.__data = HSV(*(round(x, 10) for x in color if isinstance(x, float)))
 
 	def asRGB(self) -> RGB:
 		ret = [*colorsys.hsv_to_rgb(*self.__data[:3]), self.__data.alpha]
