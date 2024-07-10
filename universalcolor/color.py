@@ -33,7 +33,13 @@ class Color:
 
 			# string contains color name
 			elif color in colornames:
-				self.__data = fromHEX(colornames[color])
+				alpha = None
+				if 'alpha' in kwargs:
+					alpha = testAlpha()
+				chex = colornames[color]
+				if alpha:
+					chex += f'{int(alpha*255):02x}'
+				self.__data = fromHEX(chex)
 
 			# string looks like CSS RGB Value
 			elif color.startswith('rgb'):

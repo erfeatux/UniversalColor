@@ -277,7 +277,7 @@ def fromHEX(color: str) -> Data:
 	if n != 6 and n != 8:
 		raise ValueError('invalid hex color')
 
-	return fromRGB(*tuple(int(''.join(tbyte), 16) for tbyte in zip(val[::2], val[1::2])))
+	return fromRGB(*tuple(int(''.join(tbyte), 16)/255 for tbyte in zip(val[::2], val[1::2])))
 
 
 # gen Data object from HSL values
