@@ -19,8 +19,12 @@ class Color:
 					raise ValueError('alpha argument is not in allowed range')
 			return alpha
 
+		# not any arguments
+		if not len(args) and not len(kwargs):
+			self.__data = fromRGB(0, 0, 0)
+
 		# default constructor (from string)
-		if len(args):
+		elif len(args):
 			if len(args) > 1: 
 				raise ValueError('default constructor allow only one string argument')
 			if not isinstance(args[0], str):
