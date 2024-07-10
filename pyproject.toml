@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "universalcolor"
-version = "24.7.0"
+version = "24.7.1"
 description = "Unversal polymorph color class"
 authors = ["erfea <erfea.tux@gmail.com>"]
 license = "LGPL-3.0-or-later"
@@ -16,3 +16,19 @@ pytest = "^8.2.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+markers = [
+	"rgb:Run rgb tests",
+	"hsl:Run hsl test",
+	"hsv:Run hsv test",
+	"ints:Run tests with integers datasets",
+	"floats:Run tests with floats datasets",
+	"kwargs:Run kwargs constructors and internal data type conversions tests",
+	"default:Run default constructor tests",
+	"names:Run by name constructor test",
+	"lsl:Run lsl constructor testss",
+	"css:Run css constructors tests",
+	"hex:Run hex constructor tests"
+]
